@@ -11,12 +11,12 @@ describe "sprockets integration" do
       env.append_path "spec/fixtures"
     end
   end
+  let(:original_png_size){File.size('spec/fixtures/largepng.png').to_i}
 
   it "should compress pngs" do
     big_response = get "/largepng.png"
-    small_response = get "/smallpng.png"
-    big_response.headers["Content-Length"].should == small_response.headers["Content-Length"]
-    big_response.body.should == small_response.body
+    big_response.headers["Content-Length"].to_i.should < original_png_size
+    big_response.headers["Content-Type"].should == 'image/png'
   end
 
   it "should compress jpgs" do
