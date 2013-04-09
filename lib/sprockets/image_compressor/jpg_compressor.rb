@@ -1,14 +1,14 @@
-require "sprockets/image_compressor/base"
+require 'sprockets/image_compressor/base'
 
 module Sprockets
   module ImageCompressor
     class JpgCompressor < Base
       def initialize
-        @name = "jpegoptim"
+        @name = 'jpegoptim'
       end
 
       def compress(content)
-        compressed_jpg_data = ""
+        compressed_jpg_data = ''
         Tempfile.open ["file", ".jpg"] do |file|
           file.binmode
           file.write content
